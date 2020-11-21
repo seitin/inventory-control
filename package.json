@@ -1,0 +1,25 @@
+{
+  "name": "inventory-control",
+  "version": "1.0.0",
+  "description": "API responsible for Green Angels' inventory control",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "inventory",
+    "control",
+    "stone",
+    "green",
+    "angels",
+    "terminal"
+  ],
+  "author": "flaviotaho@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg-promise": "^10.8.0"
+  }
+}
