@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const routes = require('src/handlers/routes')
 const database = require('src/database')
 
@@ -17,6 +18,10 @@ function startServer () {
     routes.registerEndpoints(app, db)
     return [app, db]
   }
+  const addBodyParser = ([app, db]) => {
+    app.use(bodyParser.urlencoded({ extended: true }))
+    return [app, db]
+  }
   const listenApp = ([app, db]) => app.listen(PORT, (err) => {
     if (err) {
       console.log(err)
@@ -26,6 +31,7 @@ function startServer () {
   })
   return database.connect(PSQL_HOST, PSQL_USER, PSQL_PASSWORD, PSQL_PORT, PSQL_DATABASE)
     .then(createExpressApp)
+    .then(addBodyParser)
     .then(registerEndpoints)
     .then(listenApp)
     .catch(err => {

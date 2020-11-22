@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "ava -v"
+    "test:s": "ava -s -v tests/*.serial.js",
+    "test:p": "ava -v tests/*.parallel.js",
+    "test": "npm run test:p && npm run test:s",
+    "coverage": "nyc ava -s -v tests/*.js"
   },
   "keywords": [
     "inventory",
@@ -27,6 +30,7 @@
     "sinon": "^9.2.1"
   },
   "devDependencies": {
-    "ava": "^3.13.0"
+    "ava": "^3.13.0",
+    "nyc": "^15.1.0"
   }
 }
