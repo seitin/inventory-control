@@ -1,17 +1,13 @@
-function getBaseStorageByPublicId (publicId, db) {
+function getBaseStorageById (id, db) {
   const query = `
     SELECT
-      b.public_id as base_public_id,
-      c.public_id as consumption_public_id,
-      bs.storage_amount as storage_amount
+      base_id,
+      consumption_id,
+      storage_amount
     FROM
-      base_storage bs
-    INNER JOIN consumptions c
-      ON bs.consumption_id = c.id
-    INNER JOIN bases b
-      ON b.id = bs.base_id
+      base_storage
     WHERE 
-      b.public_id = '${publicId}'
+      base_id = '${id}'
   `
   return db.any(query)
 }
@@ -19,20 +15,16 @@ function getBaseStorageByPublicId (publicId, db) {
 function getBasesStorage (db) {
   const query = `
     SELECT
-      b.public_id AS base_public_id,
-      c.public_id AS consumption_public_id,
-      bs.storage_amount
+      base_id,
+      consumption_id,
+      storage_amount
     FROM
       base_storage bs
-    INNER JOIN consumptions c
-      ON bs.consumption_id = c.id
-    INNER JOIN bases b
-      ON bs.base_id = b.id
   `
   return db.any(query)
 }
 
-function getHighestBaseStorage (publicConsumptionId, db) {
+function getHighestBaseStorage (consumptionId, db) {
   const query = `
     SELECT
       bs.consumption_id,
@@ -40,10 +32,8 @@ function getHighestBaseStorage (publicConsumptionId, db) {
       bs.storage_amount
     FROM
       base_storage bs
-    INNER JOIN consumptions c
-    ON c.id = bs.consumption_id
     WHERE
-      c.public_id = '${publicConsumptionId}'
+      consumption_id = '${consumptionId}'
     ORDER BY
       bs.storage_amount DESC
     LIMIT 1
@@ -52,7 +42,7 @@ function getHighestBaseStorage (publicConsumptionId, db) {
 }
 
 module.exports = {
-  getBaseStorageByPublicId,
+  getBaseStorageById,
   getBasesStorage,
   getHighestBaseStorage
 }

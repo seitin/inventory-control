@@ -5,10 +5,10 @@ const criticality = require('src/handlers/business/criticality')
 
 const handler = (db) => (req, res) => {
   const period = parseInt(req.params.period || 14)
-  const publicId = req.params.publicId
+  const baseId = req.params.baseId
 
-  const getCoverage = attendancesQueries.getCoverage(publicId, period, db)
-  const getStorage = basesQueries.getBaseStorageByPublicId(publicId, db)
+  const getCoverage = attendancesQueries.getCoverage(baseId, period, db)
+  const getStorage = basesQueries.getBaseStorageById(baseId, db)
 
   const calculateCriticalities = (expectedConsumptions, baseStorages) => {
     return zip(expectedConsumptions, baseStorages)
@@ -32,7 +32,7 @@ const handler = (db) => (req, res) => {
 }
 
 module.exports = {
-  path: '/bases/:publicId/criticality',
+  path: '/bases/:baseId/criticality',
   method: 'get',
   handler
 }
