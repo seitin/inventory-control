@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava -v"
   },
   "keywords": [
     "inventory",
@@ -18,8 +18,15 @@
   "author": "flaviotaho@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "camelcase-keys": "^6.2.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "pg-promise": "^10.8.0"
+    "humps": "^2.0.1",
+    "lodash": "^4.17.20",
+    "pg-promise": "^10.8.0",
+    "sinon": "^9.2.1"
+  },
+  "devDependencies": {
+    "ava": "^3.13.0"
   }
 }

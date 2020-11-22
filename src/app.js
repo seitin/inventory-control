@@ -24,7 +24,6 @@ function startServer () {
     }
     console.log(`Server running on http://localhost:${PORT}`)
   })
-
   return database.connect(PSQL_HOST, PSQL_USER, PSQL_PASSWORD, PSQL_PORT, PSQL_DATABASE)
     .then(createExpressApp)
     .then(registerEndpoints)
@@ -35,4 +34,6 @@ function startServer () {
     })
 }
 
-module.exports = startServer()
+module.exports = {
+  start: startServer
+}

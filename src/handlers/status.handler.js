@@ -1,9 +1,14 @@
-const handler = (db) => (req, res) => {
+const handler = (db) => async (req, res) => {
+  const databaseConnection = db.client.readyForQuery
   const status = {
     api: 'Ok',
-    databaseConnection: db.client.readyForQuery
+    databaseConnection
   }
-  res.send(status)
+  if (databaseConnection) {
+    res.send(status)
+  } else {
+    res.status(400).send(status)
+  }
 }
 
 module.exports = {
