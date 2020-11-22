@@ -14,6 +14,7 @@ const CSV_PATH = 'seed/csv/'
 const SQL_PATH = 'seed/sql/'
 
 const tables = [
+  'expeditions',
   'country_states',
   'consumptions',
   'bases',
@@ -26,6 +27,13 @@ const readFile = (path) => new Promise((resolve, reject) => fs.readFile(path, 'u
     return reject(err)
   }
   return resolve(content)
+}))
+
+const fileExists = (path) => new Promise((resolve, reject) => fs.access(path, fs.F_OK, (err) => {
+  if (err) {
+    return resolve(false)
+  }
+  return resolve(true)
 }))
 
 function saveCSVIntoSQL (tablename, csv, db) {
@@ -77,13 +85,16 @@ async function insertCSVIntoTable (tablename, db) {
     }
     return result
   }
-  const text = await readFile(CSV_PATH + tablename + '.csv')
   const query = await readFile(SQL_PATH + tablename + '.sql')
-  const csv = toCSV(text)
-
   await db.none(`DROP TABLE IF EXISTS ${tablename} CASCADE`)
   await db.none(query)
-  await saveCSVIntoSQL(tablename, csv, db)
+
+  const csvExists = await fileExists(CSV_PATH + tablename + '.csv')
+  if (csvExists) {
+    const text = await readFile(CSV_PATH + tablename + '.csv')
+    const csv = toCSV(text)
+    await saveCSVIntoSQL(tablename, csv, db)
+  }
 }
 
 const seed = async (db) => {
