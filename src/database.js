@@ -1,4 +1,7 @@
 function camelizeColumnNames (data) {
+  if (data.length <= 0) {
+    return
+  }
   var names = Object.keys(data[0])
   var camels = names.map(n => {
     return humps.camelize(n)

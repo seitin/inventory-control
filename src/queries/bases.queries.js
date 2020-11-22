@@ -32,7 +32,27 @@ function getBasesStorage (db) {
   return db.any(query)
 }
 
+function getHighestBaseStorage (publicConsumptionId, db) {
+  const query = `
+    SELECT
+      bs.consumption_id,
+      bs.base_id,
+      bs.storage_amount
+    FROM
+      base_storage bs
+    INNER JOIN consumptions c
+    ON c.id = bs.consumption_id
+    WHERE
+      c.public_id = '${publicConsumptionId}'
+    ORDER BY
+      bs.storage_amount DESC
+    LIMIT 1
+  `
+  return db.one(query)
+}
+
 module.exports = {
   getBaseStorageByPublicId,
-  getBasesStorage
+  getBasesStorage,
+  getHighestBaseStorage
 }
