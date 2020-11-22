@@ -1,4 +1,5 @@
 const express = require('express')
+const chalk = require('chalk')
 const bodyParser = require('body-parser')
 const routes = require('src/handlers/routes')
 const database = require('src/database')
@@ -14,8 +15,8 @@ const {
 
 function startServer () {
   const createExpressApp = (db) => ([express(), db])
-  const registerEndpoints = ([app, db]) => {
-    routes.registerEndpoints(app, db)
+  const registerEndpoints = async ([app, db]) => {
+    await routes.registerEndpoints(app, db)
     return [app, db]
   }
   const addBodyParser = ([app, db]) => {
@@ -31,7 +32,7 @@ function startServer () {
       console.log(err)
       throw err
     }
-    console.log(`Server running on http://localhost:${PORT}`)
+    console.log(chalk.blue(`Server running on http://localhost:${PORT}`))
   })
   return database.connect(PSQL_HOST, PSQL_USER, PSQL_PASSWORD, PSQL_PORT, PSQL_DATABASE)
     .then(createExpressApp)

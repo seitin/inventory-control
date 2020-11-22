@@ -27,7 +27,6 @@ var humps = require('humps')
 var pgp = require('pg-promise')(options)
 
 function connect (host, user, password, port) {
-  console.log('Database connecting...')
   const db = pgp({
     user,
     host,
