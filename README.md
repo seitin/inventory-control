@@ -1,5 +1,5 @@
 # inventory-control
-[![circleci](https://circleci.com/gh/seitin/inventory-control.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
+[![circleci](https://circleci.com/gh/seitin/inventory-control.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)  
 This project contains a REST API responsible for manage inventory storages across several bases.  
 
 ## Installing and requirements
