@@ -1,7 +1,7 @@
 
     CREATE TABLE attendances (
       id UUID NOT NULL DEFAULT uuid_generate_v1(),
-      date TIMESTAMP NOT NULL,
+      date TIMESTAMP NOT NULL DEFAULT NOW(),
       consumption_id UUID NOT NULL,
       base_id UUID NOT NULL,
       amount int NOT NULL,

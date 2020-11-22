@@ -1,4 +1,4 @@
-async function getCoverage (baseId, period, db) {
+async function getExpectedCoverage (baseId, period, db) {
   const query = `
     WITH dates as (
     SELECT
@@ -34,5 +34,5 @@ async function getCoverage (baseId, period, db) {
 }
 
 module.exports = {
-  getCoverage
+  getExpectedCoverage
 }

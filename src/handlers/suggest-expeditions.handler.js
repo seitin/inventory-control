@@ -1,12 +1,12 @@
-// const basesQueries = require('src/queries/bases.queries')
-// const attendancesQueries = require('src/queries/attendances.queries')
+const basesQueries = require('src/queries/bases.queries')
+const attendancesQueries = require('src/queries/attendances.queries')
 
 const handler = (db) => async (req, res) => {
-  const basePublicId = req.params.basePublicId
+  const baseId = req.params.baseId
   const period = parseInt(req.params.period || 14)
-  const consumptionPublicId = req.params.consumptionPublicId
+  const consumptionId = req.params.consumptionId
 
-  const getHighestStorageBase = basesQueries.getHighestStorageBase(consumptionPublicId, db)
+  const getHighestStorageBase = basesQueries.getHighestStorageBase(consumptionId, db)
 
   const calculateCriticalities = (expectedConsumptions, baseStorages) => {
     return zip(expectedConsumptions, baseStorages)
@@ -17,9 +17,9 @@ const handler = (db) => async (req, res) => {
         })
       })
   }
-  
-  const getExpectedCoverage = (basePublicId) => attendancesQueries.getExpectedCoverage(basePublicId, period, db)
-  
+
+  const getExpectedCoverage = (baseId) => attendancesQueries.getExpectedCoverage(baseId, period, db)
+
   // basesQueries.getBasesStorage(db)
   //   .then()
 
@@ -30,7 +30,7 @@ const handler = (db) => async (req, res) => {
 }
 
 module.exports = {
-  path: '/expeditions/consumptions/:consumptionPublicId/destination/:basePublicId/suggested',
+  path: '/expeditions/consumptions/:consumptionId/destination/:baseId/suggested',
   method: 'get',
   handler
 }

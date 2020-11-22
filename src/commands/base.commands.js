@@ -23,6 +23,19 @@ function updateBaseStorage (source, destination, consumptionId, amount, db) {
   ])
 }
 
+function getBasesStorage (db) {
+  const query = `
+    SELECT
+      base_id,
+      consumption_id,
+      storage_amount
+    FROM
+      base_storage
+  `
+  return db.any(query)
+}
+
 module.exports = {
-  updateBaseStorage
+  updateBaseStorage,
+  getBasesStorage
 }

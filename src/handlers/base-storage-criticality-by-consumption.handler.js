@@ -7,7 +7,7 @@ const handler = (db) => (req, res) => {
   const period = parseInt(req.params.period || 14)
   const baseId = req.params.baseId
 
-  const getCoverage = attendancesQueries.getCoverage(baseId, period, db)
+  const getExpectedCoverage = attendancesQueries.getExpectedCoverage(baseId, period, db)
   const getStorage = basesQueries.getBaseStorageById(baseId, db)
 
   const calculateCriticalities = (expectedConsumptions, baseStorages) => {
@@ -25,7 +25,7 @@ const handler = (db) => (req, res) => {
   })
 
   return Promise.all([
-    getCoverage,
+    getExpectedCoverage,
     getStorage
   ]).then(mapResponse)
     .then((response) => res.send(response))
