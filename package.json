@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test:s": "ava -s -v --timeout=1m tests/*.serial.js",
+    "test:s": "ava -s -v --timeout=20m tests/*.serial.js",
     "test:p": "ava -v tests/*.parallel.js",
     "test": "npm run test:p && npm run test:s",
     "coverage": "nyc ava -s -v tests/*.js"
