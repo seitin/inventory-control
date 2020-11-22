@@ -14,12 +14,12 @@ const CSV_PATH = 'seed/csv/'
 const SQL_PATH = 'seed/sql/'
 
 const tables = [
-  'expeditions',
   'country_states',
   'consumptions',
   'bases',
   'base_storage',
-  'attendances'
+  'attendances',
+  'expeditions'
 ]
 
 const readFile = (path) => new Promise((resolve, reject) => fs.readFile(path, 'utf8', (err, content) => {
