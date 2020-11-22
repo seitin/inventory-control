@@ -1,4 +1,4 @@
-require('dotenv').config({ path: 'tests/helpers/.env' })
+require('dotenv').config({ path: '.env.test' })
 const chunk = require('lodash/chunk')
 const database = require('src/database')
 const fs = require('fs')
