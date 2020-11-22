@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test:s": "ava -s -v tests/*.serial.js",
+    "test:s": "ava --timeout=20m -s -v tests/*.serial.js",
     "test:p": "ava -v tests/*.parallel.js",
     "test": "npm run test:p && npm run test:s",
-    "coverage": "nyc ava -s -v tests/*.js"
+    "coverage": "nyc ava -s -v tests/*.js --timeout=20m"
   },
   "keywords": [
     "inventory",
